@@ -10,4 +10,8 @@
 #  21 April 2020
 #---------------------------------------------------------------------------------------------------------------------
 
+require_relative 'classes/profile'
+
 puts "Welcome to MedMinder"
+
+# profile = Profile.new
