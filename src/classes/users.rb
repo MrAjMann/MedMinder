@@ -46,7 +46,7 @@ class Users
         {'Quit' => -> do exit_app end}
       ]
       $prompt.select("", profile_menu)
-      # $prompt.select("Select your profile",File.basename(@path, ".yml") )
+  
       # user_menu
   else
     no_creation_of_profile
@@ -88,18 +88,10 @@ end
 
 def init_file(name)
   if !File.exists?("#{@full_name}.yml")
-    name = File.new("#{@full_name}.yml", "w")
-    name.puts YAML.dump({})
-    name.close
+    File.open("#{@full_name}.yml", "w") { |f| YAML.dump("Medication_List", f) }
   end
 end
 
-def load_user_file(name)
-  if File.exists?("./#{@full_name}.yml")
-    YAML.load("./#{@full_name}.yml")
-  #  puts file_load
-  end
-end
 
 def add_user
   appWelcome
@@ -111,9 +103,8 @@ def add_user
       @full_name = {Name: "#{@full_name}"}
     end
   
-    init_file("./#{@full_name}.yml")
-    
-    load_user_file("./#{@full_name}.yml")
+    # Initializes the YAML file
+    init_file("#{@full_name}.yml")
     clear
     puts "#{@full_name}, Your Profile has been created"
     response = $prompt.yes?("Would you like to create a new profile?")
@@ -124,16 +115,8 @@ def add_user
     else
       user_list
     end
-
 end
   
 end
 
 
-# def initialize_db(name)
-#   if !(File.exists?("./db/#{name}_db.yml"))
-#     player_db = File.new("./db/#{name}_db.yml", "w")
-#     player_db.puts YAML.dump({})
-#     player_db.close
-#   end
-# end
