@@ -1,0 +1,19 @@
+---
+include:
+  - "**/*.rb"
+exclude:
+  - spec/**/*
+  - test/**/*
+  - vendor/**/*
+  - ".bundle/**/*"
+documentation:
+  Enabled: false
+require: []
+domains: []
+reporters:
+  - rubocop
+  - require_not_found
+require_paths:
+  - src
+plugins: []
+max_files: 5000

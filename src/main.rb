@@ -11,11 +11,14 @@
 #---------------------------------------------------------------------------------------------------------------------
 # require 'YAML'
 require 'tty-prompt'
+require 'tty-font'
 require_relative 'classes/users'
 require_relative 'classes/medications'
 require_relative './methods/headers'
 
-
+def clear
+  puts "\e[2J\e[f"
+end
 
 profile = Users.new
 
