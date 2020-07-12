@@ -30,19 +30,26 @@ end
 
 # __________________________________
 
-#   def remove_medication
-#     medication_data = YAML.load(File.read("#{@path}"))
-#       medication_info = medication_data{}
-#       medication_info.each do |k, v|
-#         puts "#{k} #{v}"
-#     end
-
-# prompt.expand('Remove Medication?') do |q|
-  # q.choice key: 'y', name: 'Remove Single medication' do delete.value[""] end
-  # q.choice key: 'd', name: 'delete all medications',    do delete.all.medication_data end
-  # q.choice key: 'q', name: 'Quit',          value: :quit
-# end
-#  end
+def remove_medication
+  medication_info = YAML.load(File.read("#{path}"))
+  if medication_info == nil
+    puts "There are no medications to list"
+    else
+      medication_info.each do |k, v|
+        puts "#{k} #{v}"
+        
+        
+       remove_medication_key =  $prompt.expand('Remove Medication?') do |q|
+          q.choice key: 'y', name: 'Remove medication' do medication_info.delete"#{k}" end
+            File.open(path, "w") { |file| file.write(remove_medication_key.to_yaml) }
+            
+            # q.choice key: 'd', name: 'delete all medications',    value: :delete.all.medication_info[""]
+            # q.choice key: 'q', name: 'Quit', value: :quit 
+          end
+          user_medications 
+    end
+  end
+end
 # __________________________________
 
 
@@ -80,6 +87,7 @@ def current_medication
     clear
     exit_app
   end
+
 end
 
           
